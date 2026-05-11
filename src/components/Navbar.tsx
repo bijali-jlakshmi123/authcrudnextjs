@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HomeIcon, Sprout } from "lucide-react";
 import { Button } from "./ui/button";
+import { ModeToggle } from "./modeToggle";
 function Navbar() {
   return (
     <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 z-50">
@@ -32,6 +33,7 @@ function Navbar() {
                 </HomeIcon>
               </Link>
             </Button>
+            <ModeToggle />
           </div>
         </div>
       </div>
