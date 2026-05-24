@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@teispace/next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   description: "Created By Bijali Jayalakshmi",
 };
 
+import { StackProvider, StackTheme } from "@stackframe/stack";
+import { stackServerApp } from "@/stack";
+
+import { TooltipProvider } from "@/components/ui/tooltip";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,15 +35,19 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          <TooltipProvider>
+            <StackProvider app={stackServerApp}>
+              <Navbar />
+              {children}
+            </StackProvider>
+          </TooltipProvider>
         </ThemeProvider>
         <h1>Footer</h1>
       </body>
